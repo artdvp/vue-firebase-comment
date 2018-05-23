@@ -13,9 +13,35 @@
 
 <body>
     <!-- body -->
-    <div class="container col-md text-center">
+    <div class="container col-md-6" id="comment">
         <br>
-        <h2>Artdvp Vue + Firebase Tut</h2>
+        <h2 class=" text-center">Comment Vue + Firebase</h2>
+        <!-- display comment -->
+        <div class="card" v-for="message in messages">
+            <div class="card-body">
+                <h5 class="card-title" v-if="message!=editText">{{ message.text }}</h5>
+                <textarea v-else name="name" class="form-control" v-model="messageText"></textarea>
+                <p class="card-text text-muted">{{ message.name }}</p>
+                <div v-if="message!=editText">
+                    <a href="#" class="card-link btn btn-danger" @click.prevent="deleteMessage(message)">delete</a>
+                    <a href="#" class="card-link btn btn-warning" @click.prevent="editMessage(message)">edit</a>
+                </div>
+                <div v-else>
+                    <a href="#" class="card-link btn btn-secondary" @click.prevent="cancelMessage">cancel</a>
+                    <a href="#" class="card-link btn btn-primary" @click.prevent="updateMessage(message)">update</a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- form design -->
+        <form v-if="!editText" @submit.prevent="storeMessage" class="form-group"> 
+            <div>
+                <textarea name="name" class="form-control" v-model="messageText"></textarea>
+                <label for="">Name</label><br>
+                <input type="text" class="form-control" v-model="name"><br>
+                <button type="submit" class="btn btn-primary">Comment</button>
+            </div>
+        </form>
     </div>
     <!-- body -->
     <!-- script -->
@@ -27,6 +53,7 @@
         crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
     <script src="firebase.config.js"></script>
+    <script src="app.js"></script>
     <!-- script -->
 </body>
 
