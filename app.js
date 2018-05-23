@@ -46,10 +46,7 @@ new Vue({
     // after add data done set data save to firebase database
     messageRef.on("child_added", snapshot => {
       // save data from message to array
-      this.messages.push({
-        ...snapshot.val(),
-        id: snapshot.key
-      });
+      this.messages.push({...snapshot.val(),id: snapshot.key});
       console.log(snapshot.val());
     });
     messageRef.on("child_removed", snapshot => {
